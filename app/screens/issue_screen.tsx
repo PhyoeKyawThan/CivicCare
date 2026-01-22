@@ -1,4 +1,5 @@
 // IssuesScreen.js
+import { issues } from "@/assets/samples/sample_dummy";
 import IssuePost from "@/components/issue-post";
 import { IssueType } from "@/constants/types";
 import {
@@ -22,8 +23,13 @@ export default function IssuesScreen() {
         "is_viewed": false
     };
     return (
-        <ScrollView>
-            <IssuePost issue={issue} />
+        <ScrollView style={{
+            paddingBottom: 50
+        }}>
+            {issues.map((issue)=>{
+                return <IssuePost key={issue.id} issue={issue}/>
+            })}
+            {/* <IssuePost issue={issue} /> */}
         </ScrollView>
     );
 }

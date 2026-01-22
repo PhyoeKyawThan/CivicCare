@@ -45,7 +45,7 @@ export default function IssuePost({ issue }: IssuePostProps) {
                         </Text>
                     </TouchableOpacity>
                 </View>
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8, justifyContent: 'space-between' }}>
+                <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8, justifyContent: 'space-evenly' }}>
                     {issue.reported_images?.map((image, index) => {
                         return (
                             <View key={index}>
