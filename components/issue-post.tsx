@@ -61,12 +61,18 @@ export default function IssuePost({ issue }: IssuePostProps) {
                     })}
                 </View>
                 <View style={{
-                    padding: 10,
+                    padding: 20,
+                    paddingLeft: -10,
+                    paddingBottom: 0,
                     flexDirection: 'row',
                     justifyContent: 'space-between'
                 }}>
                     <Text style={issue.is_viewed ? styles.viewed : styles.pending}>{issue.is_viewed ? 'Viewed By Administrator' : 'Pending'}</Text>
-                    <Text>Comments 100</Text>
+                    <TouchableOpacity onPress={()=>{}}>
+                        <Text style={{
+                            fontWeight: "500"
+                        }}>Comments {0}</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
             <ImageViewer image={currentImage} visible={visible} onClose={toggleVisible} />
