@@ -20,13 +20,13 @@ export default function TabLayout() {
         tabBarActiveTintColor: 'white',
         tabBarInactiveTintColor: '#bfd2f6',
         headerShown: false,
-        tabBarShowLabel: true,
+        tabBarShowLabel: false,
         tabBarStyle: {
           position: 'absolute',
           backgroundColor: '#378fc5',
           borderTopWidth: 1,
           borderTopColor: isDark ? '#1E293B' : '#E2E8F0',
-          height: 70 + insets.bottom,
+          height: 60 + insets.bottom,
           paddingBottom: insets.bottom,
           paddingTop: 12,
           borderRadius: 50,
@@ -55,7 +55,7 @@ export default function TabLayout() {
               <IconSymbol
                 size={focused ? 26 : 24}
                 name="house.fill"
-                color='white'
+                color={color}
               />
             </View>
           ),
@@ -71,7 +71,7 @@ export default function TabLayout() {
               <IconSymbol
                 size={focused ? 26 : 24}
                 name="bell.fill"
-                color='white'
+                color={color}
               />
             </View>
           ),
@@ -83,15 +83,17 @@ export default function TabLayout() {
         options={{
           title: 'Report',
           tabBarIcon: ({ color, focused }) => (
-            <View style={styles.centralIconContainer}>
+            <View style={[styles.centralIconContainer, focused ? {
+              backgroundColor: 'white'
+            } : '']}>
               <View style={[
                 styles.centralIconBackground,
-                { backgroundColor: isDark ? '#0F172A' : '#FFFFFF' }
+                { backgroundColor: '#378fc5' }
               ]}>
                 <IconSymbol
                   size={28}
                   name="exclamationmark.triangle.fill"
-                  color='#0a065d'
+                  color={color}
                 />
               </View>
             </View>
@@ -108,7 +110,7 @@ export default function TabLayout() {
               <IconSymbol
                 size={focused ? 26 : 24}
                 name="person.fill"
-                color='white'
+                color={color}
               />
             </View>
           ),
@@ -124,7 +126,7 @@ export default function TabLayout() {
               <IconSymbol
                 size={focused ? 26 : 24}
                 name="gearshape.fill"
-                color='white'
+                color={color}
               />
             </View>
           ),
@@ -146,7 +148,7 @@ const styles = StyleSheet.create({
     borderRadius: 32,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#1b55b3',
+    backgroundColor: '#bfd2f0',
     shadowColor: '#3B82F6',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,

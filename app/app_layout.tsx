@@ -11,7 +11,7 @@ function AppLayout() {
     return null; 
   }
 
-  const isLoggedIn = !!user;
+  const isLoggedIn = true;
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>

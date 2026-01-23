@@ -1,4 +1,4 @@
-import { UserLogin } from "@/constants/auth";
+import { LoginCredentials } from "@/constants/auth";
 import { useAuth } from "@/hooks/use-auth";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
@@ -8,7 +8,6 @@ import {
     Alert,
     Dimensions,
     KeyboardAvoidingView,
-    Platform,
     ScrollView,
     StyleSheet,
     Text,
@@ -51,7 +50,7 @@ export default function Login() {
     const handleLogin = async () => {
         if (!validateForm()) return;
         try {
-            const user: UserLogin = {
+            const user: LoginCredentials = {
                 'email': email,
                 'password': password
             };
@@ -68,7 +67,7 @@ export default function Login() {
         <SafeAreaView style={styles.safeArea}>
             <KeyboardAvoidingView
                 style={styles.container}
-                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                behavior="height"
             >
                 <ScrollView
                     contentContainerStyle={styles.scrollContainer}

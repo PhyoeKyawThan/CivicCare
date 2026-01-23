@@ -22,8 +22,7 @@ function Home() {
         }
       }}>
         <TopTap.Screen name="Issues" options={{
-          title: "Issues",
-
+          title: "Issues"
         }} component={IssuesScreen} />
         <TopTap.Screen name="Solved" component={SolvedScreen} />
         <TopTap.Screen name="Onsolving" component={OnSolvingIssueScreen} />
