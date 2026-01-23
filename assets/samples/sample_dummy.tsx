@@ -1,4 +1,4 @@
-import { IssueType } from "@/constants/types";
+import { IssueType } from "@/constants/issue_types";
 export const issues: IssueType[] = [
     {
         "id": 1001,

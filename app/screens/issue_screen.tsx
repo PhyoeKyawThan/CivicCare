@@ -3,9 +3,8 @@ import { issues } from "@/assets/samples/sample_dummy";
 import IssuePost from "@/components/issue-post";
 import {
     ScrollView,
-    Text,
-    View,
-    StyleSheet
+    StyleSheet,
+    View
 } from "react-native";
 
 export default function IssuesScreen() {
@@ -24,6 +23,7 @@ export default function IssuesScreen() {
 const styles = StyleSheet.create({
     feed_container: {
         flex: 1,
-        paddingBottom: 70
+        paddingBottom: 70,
+        // backgroundColor: '#90D5ff'
     }
 });

@@ -1,10 +1,9 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { HapticTab } from '@/components/haptic-tab';
 import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -15,16 +14,19 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        tabBarInactiveTintColor: isDark ? '#94A3B8' : '#64748B',
+        sceneStyle: {
+          backgroundColor: '#90D5ff'
+        },
+        tabBarActiveTintColor: 'white',
+        tabBarInactiveTintColor: '#bfd2f6',
         headerShown: false,
         tabBarShowLabel: true,
         tabBarStyle: {
           position: 'absolute',
-          backgroundColor: isDark ? '#0F172A' : '#FFFFFF',
+          backgroundColor: '#378fc5',
           borderTopWidth: 1,
           borderTopColor: isDark ? '#1E293B' : '#E2E8F0',
-          height: 60 + insets.bottom,
+          height: 70 + insets.bottom,
           paddingBottom: insets.bottom,
           paddingTop: 12,
           borderRadius: 50,
@@ -39,6 +41,9 @@ export default function TabLayout() {
           fontWeight: '500',
           marginTop: 4,
         },
+        tabBarIconStyle: {
+          color: '#FFFF'
+        },
         tabBarButton: HapticTab,
       }}>
       <Tabs.Screen
@@ -47,10 +52,10 @@ export default function TabLayout() {
           title: 'Home',
           tabBarIcon: ({ color, focused }) => (
             <View style={focused ? styles.activeIconContainer : null}>
-              <IconSymbol 
-                size={focused ? 26 : 24} 
-                name="house.fill" 
-                color={color} 
+              <IconSymbol
+                size={focused ? 26 : 24}
+                name="house.fill"
+                color='white'
               />
             </View>
           ),
@@ -63,10 +68,10 @@ export default function TabLayout() {
           title: 'Alerts',
           tabBarIcon: ({ color, focused }) => (
             <View style={focused ? styles.activeIconContainer : null}>
-              <IconSymbol 
-                size={focused ? 26 : 24} 
-                name="bell.fill" 
-                color={color} 
+              <IconSymbol
+                size={focused ? 26 : 24}
+                name="bell.fill"
+                color='white'
               />
             </View>
           ),
@@ -83,10 +88,10 @@ export default function TabLayout() {
                 styles.centralIconBackground,
                 { backgroundColor: isDark ? '#0F172A' : '#FFFFFF' }
               ]}>
-                <IconSymbol 
-                  size={28} 
-                  name="exclamationmark.triangle.fill" 
-                  color={color} 
+                <IconSymbol
+                  size={28}
+                  name="exclamationmark.triangle.fill"
+                  color='#0a065d'
                 />
               </View>
             </View>
@@ -100,10 +105,10 @@ export default function TabLayout() {
           title: 'Profile',
           tabBarIcon: ({ color, focused }) => (
             <View style={focused ? styles.activeIconContainer : null}>
-              <IconSymbol 
-                size={focused ? 26 : 24} 
-                name="person.fill" 
-                color={color} 
+              <IconSymbol
+                size={focused ? 26 : 24}
+                name="person.fill"
+                color='white'
               />
             </View>
           ),
@@ -116,10 +121,10 @@ export default function TabLayout() {
           title: 'Settings',
           tabBarIcon: ({ color, focused }) => (
             <View style={focused ? styles.activeIconContainer : null}>
-              <IconSymbol 
-                size={focused ? 26 : 24} 
-                name="gearshape.fill" 
-                color={color} 
+              <IconSymbol
+                size={focused ? 26 : 24}
+                name="gearshape.fill"
+                color='white'
               />
             </View>
           ),
@@ -141,7 +146,7 @@ const styles = StyleSheet.create({
     borderRadius: 32,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#3B82F6',
+    backgroundColor: '#1b55b3',
     shadowColor: '#3B82F6',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
@@ -155,6 +160,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 3,
-    borderColor: '#3B82F6',
+    borderColor: '#b0c3e1',
   },
 });

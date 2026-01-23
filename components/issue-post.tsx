@@ -1,6 +1,6 @@
-import { IssueType } from "@/constants/types";
+import { IssueType } from "@/constants/issue_types";
 import { useState } from "react";
-import { Modal, Button, Image, StyleSheet, Text, TouchableOpacity, View, Alert } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import ImageViewer from "./image-viewer";
 
 interface IssuePostProps {
@@ -77,7 +77,9 @@ export default function IssuePost({ issue }: IssuePostProps) {
 const styles = StyleSheet.create({
     card: {
         // height: 400,
-        backgroundColor: 'white',
+        backgroundColor: '#EEF6FF',
+        boxShadow: 'rgba(0,0,0,0.08)',
+        borderColor: '#E5E7EB',
         margin: 10,
         padding: 20,
         borderRadius: 20,

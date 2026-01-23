@@ -1,5 +1,5 @@
-import { ImageViewerType } from "@/constants/types"
-import { Button, Dimensions, Image, Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { ImageViewerType } from "@/constants/issue_types";
+import { Dimensions, Image, Modal, StyleSheet, TouchableOpacity, View } from "react-native";
 import { IconSymbol } from "./ui/icon-symbol";
 
 const { width, height } = Dimensions.get('screen');

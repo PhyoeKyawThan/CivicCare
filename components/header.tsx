@@ -4,9 +4,9 @@ export function Header(isDark: boolean) {
         <View style={[styles.header, isDark && styles.darkHeader]}>
             <Text style={styles.appName}>
                 <Text style={styles.appNameBold}>Civic</Text>
-                <Text style={[styles.appNameLight, isDark && styles.darkAppNameLight]}>Care</Text>
+                <Text style={[styles.darkAppNameLight]}>Care</Text>
             </Text>
-            <Text style={[styles.headerSubtitle, isDark && styles.darkText]}>
+            <Text style={[styles.darkText]}>
                 Community Dashboard
             </Text>
         </View>
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingTop: 16,
         paddingBottom: 12,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#55bdfd',
         borderBottomWidth: 1,
         borderBottomColor: '#E2E8F0',
     },
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     },
     appNameBold: {
         fontWeight: '700',
-        color: '#3B82F6',
+        color: '#0963f5',
         letterSpacing: -0.5,
     },
     appNameLight: {
@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
         fontWeight: '500',
     },
     darkText: {
-        color: '#94A3B8',
+        color: '#ede8e8',
     },
 })
