@@ -1,10 +1,13 @@
-import { Text, View } from "react-native";
+import { useAuth } from "@/hooks/use-auth";
+import { Button } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 function Settings(){
+  const auth = useAuth();
   return (
-    <View>
-      <Text>Hello From Settings</Text>
-    </View>
+    <SafeAreaView>
+      <Button title="Logout" onPress={()=>auth.logout()}/>
+    </SafeAreaView>
   )
 }
 

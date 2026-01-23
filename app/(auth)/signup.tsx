@@ -1,21 +1,21 @@
-import useAuth from "@/contexts/use-auth";
+import { SignupData } from "@/constants/auth";
+import { useAuth } from "@/hooks/use-auth";
 import { Ionicons } from "@expo/vector-icons";
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Picker } from "@react-native-picker/picker";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import {
-    ActivityIndicator,
-    Alert,
-    Dimensions,
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View
+  ActivityIndicator,
+  Alert,
+  Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -31,20 +31,20 @@ export default function Signup() {
     password: "",
     confirmPassword: "",
     dateOfBirth: new Date(),
-    role: 'citizen' as UserRole,
+    // role: 'citizen' as UserRole,
   });
-  
+
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
   const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  
+
   const { signup } = useAuth();
 
   const handleInputChange = (field: string, value: string | Date | UserRole) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-    // Clear error for this field when user starts typing
+
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: "" }));
     }
@@ -52,28 +52,28 @@ export default function Signup() {
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    
+
     // Full Name validation
     if (!formData.fullName.trim()) {
       newErrors.fullName = "Full name is required";
     } else if (formData.fullName.trim().length < 2) {
       newErrors.fullName = "Name must be at least 2 characters";
     }
-    
+
     // Email validation
     if (!formData.email) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Email is invalid";
     }
-    
+
     // Phone validation
     if (!formData.phone) {
       newErrors.phone = "Phone number is required";
     } else if (!/^\d{10,}$/.test(formData.phone.replace(/\D/g, ''))) {
       newErrors.phone = "Phone number must be at least 10 digits";
     }
-    
+
     // Password validation
     if (!formData.password) {
       newErrors.password = "Password is required";
@@ -82,60 +82,44 @@ export default function Signup() {
     } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.password)) {
       newErrors.password = "Password must contain uppercase, lowercase, and numbers";
     }
-    
+
     // Confirm Password validation
     if (!formData.confirmPassword) {
       newErrors.confirmPassword = "Please confirm your password";
     } else if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match";
     }
-    
+
     // Date of Birth validation
     const today = new Date();
     const minDate = new Date();
     minDate.setFullYear(today.getFullYear() - 120); // 120 years max
     const maxDate = new Date();
     maxDate.setFullYear(today.getFullYear() - 13); // Must be at least 13 years old
-    
+
     if (formData.dateOfBirth > maxDate || formData.dateOfBirth < minDate) {
       newErrors.dateOfBirth = "You must be at least 13 years old";
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSignup = async () => {
     if (!validateForm()) return;
-    
+
     try {
       setLoading(true);
-      
-      // TODO: Replace with your actual API endpoint
-      const response = await fetch('https://your-api.com/auth/signup', {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          fullName: formData.fullName.trim(),
-          email: formData.email.trim(),
-          phone: formData.phone.replace(/\D/g, ''),
-          password: formData.password,
-          dateOfBirth: formData.dateOfBirth.toISOString().split('T')[0],
-          role: formData.role,
-        }),
-      });
 
-      const data = await response.json();
-      
-      if (response.ok && data.token && data.user) {
-        // await signup(data.token, data.user);
-        Alert.alert("Success", "Account created successfully! Welcome to CivicCare!");
-      } else {
-        Alert.alert("Signup Failed", data.message || "Failed to create account");
+      const user: SignupData = {
+        fullName: formData.fullName.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.replace(/\D/g, ''),
+        password: formData.password,
+        dateOfBirth: formData.dateOfBirth.toISOString().split('T')[0],
+        role: 'citizan',
       }
+      await signup({user: user});
     } catch (error) {
       console.error("Signup error:", error);
       Alert.alert("Error", "Network error. Please check your connection and try again.");
@@ -171,18 +155,18 @@ export default function Signup() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <KeyboardAvoidingView 
+      <KeyboardAvoidingView
         style={styles.container}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
-        <ScrollView 
+        <ScrollView
           contentContainerStyle={styles.scrollContainer}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
         >
           {/* Header */}
           <View style={styles.header}>
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={() => router.back()}
               style={styles.backButton}
             >
@@ -206,10 +190,10 @@ export default function Signup() {
                 styles.inputWrapper,
                 errors.fullName && styles.inputError
               ]}>
-                <Ionicons 
-                  name="person-outline" 
-                  size={20} 
-                  color="#64748B" 
+                <Ionicons
+                  name="person-outline"
+                  size={20}
+                  color="#64748B"
                   style={styles.inputIcon}
                 />
                 <TextInput
@@ -234,10 +218,10 @@ export default function Signup() {
                 styles.inputWrapper,
                 errors.email && styles.inputError
               ]}>
-                <Ionicons 
-                  name="mail-outline" 
-                  size={20} 
-                  color="#64748B" 
+                <Ionicons
+                  name="mail-outline"
+                  size={20}
+                  color="#64748B"
                   style={styles.inputIcon}
                 />
                 <TextInput
@@ -264,10 +248,10 @@ export default function Signup() {
                 styles.inputWrapper,
                 errors.phone && styles.inputError
               ]}>
-                <Ionicons 
-                  name="call-outline" 
-                  size={20} 
-                  color="#64748B" 
+                <Ionicons
+                  name="call-outline"
+                  size={20}
+                  color="#64748B"
                   style={styles.inputIcon}
                 />
                 <TextInput
@@ -297,10 +281,10 @@ export default function Signup() {
                 onPress={() => setShowDatePicker(true)}
                 disabled={loading}
               >
-                <Ionicons 
-                  name="calendar-outline" 
-                  size={20} 
-                  color="#64748B" 
+                <Ionicons
+                  name="calendar-outline"
+                  size={20}
+                  color="#64748B"
                   style={styles.inputIcon}
                 />
                 <Text style={styles.dateText}>
@@ -316,16 +300,16 @@ export default function Signup() {
             </View>
 
             {/* Role Selection */}
-            <View style={styles.inputGroup}>
+            {/* <View style={styles.inputGroup}>
               <Text style={styles.label}>I am a *</Text>
               <View style={[
                 styles.inputWrapper,
                 styles.pickerWrapper
               ]}>
-                <Ionicons 
-                  name="people-outline" 
-                  size={20} 
-                  color="#64748B" 
+                <Ionicons
+                  name="people-outline"
+                  size={20}
+                  color="#64748B"
                   style={styles.inputIcon}
                 />
                 <Picker
@@ -339,7 +323,7 @@ export default function Signup() {
                   <Picker.Item label="Administrator" value="admin" />
                 </Picker>
               </View>
-            </View>
+            </View> */}
 
             {/* Password */}
             <View style={styles.inputGroup}>
@@ -348,10 +332,10 @@ export default function Signup() {
                 styles.inputWrapper,
                 errors.password && styles.inputError
               ]}>
-                <Ionicons 
-                  name="lock-closed-outline" 
-                  size={20} 
-                  color="#64748B" 
+                <Ionicons
+                  name="lock-closed-outline"
+                  size={20}
+                  color="#64748B"
                   style={styles.inputIcon}
                 />
                 <TextInput
@@ -363,14 +347,14 @@ export default function Signup() {
                   secureTextEntry={!showPassword}
                   editable={!loading}
                 />
-                <TouchableOpacity 
+                <TouchableOpacity
                   style={styles.eyeIcon}
                   onPress={() => setShowPassword(!showPassword)}
                 >
-                  <Ionicons 
-                    name={showPassword ? "eye-off-outline" : "eye-outline"} 
-                    size={20} 
-                    color="#64748B" 
+                  <Ionicons
+                    name={showPassword ? "eye-off-outline" : "eye-outline"}
+                    size={20}
+                    color="#64748B"
                   />
                 </TouchableOpacity>
               </View>
@@ -389,10 +373,10 @@ export default function Signup() {
                 styles.inputWrapper,
                 errors.confirmPassword && styles.inputError
               ]}>
-                <Ionicons 
-                  name="lock-closed-outline" 
-                  size={20} 
-                  color="#64748B" 
+                <Ionicons
+                  name="lock-closed-outline"
+                  size={20}
+                  color="#64748B"
                   style={styles.inputIcon}
                 />
                 <TextInput
@@ -404,14 +388,14 @@ export default function Signup() {
                   secureTextEntry={!showConfirmPassword}
                   editable={!loading}
                 />
-                <TouchableOpacity 
+                <TouchableOpacity
                   style={styles.eyeIcon}
                   onPress={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
-                  <Ionicons 
-                    name={showConfirmPassword ? "eye-off-outline" : "eye-outline"} 
-                    size={20} 
-                    color="#64748B" 
+                  <Ionicons
+                    name={showConfirmPassword ? "eye-off-outline" : "eye-outline"}
+                    size={20}
+                    color="#64748B"
                   />
                 </TouchableOpacity>
               </View>
@@ -433,7 +417,7 @@ export default function Signup() {
             </View>
 
             {/* Signup Button */}
-            <TouchableOpacity 
+            <TouchableOpacity
               style={[styles.signupButton, loading && styles.signupButtonDisabled]}
               onPress={handleSignup}
               disabled={loading}

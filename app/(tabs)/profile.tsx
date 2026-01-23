@@ -1,10 +1,16 @@
+import { AuthContext } from "@/contexts/auth-context";
+import { useContext } from "react";
 import { Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-function Profile(){
+function Profile() {
+  const user = useContext(AuthContext);
   return (
-    <View>
-      <Text>Hello From Profile</Text>
-    </View>
+    <SafeAreaView>
+      <View>
+        <Text>Hello From Profile</Text>
+      </View>
+    </SafeAreaView>
   )
 }
 

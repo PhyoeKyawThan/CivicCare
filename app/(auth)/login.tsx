@@ -1,4 +1,5 @@
-import useAuth from "@/contexts/use-auth";
+import { UserLogin } from "@/constants/auth";
+import { useAuth } from "@/hooks/use-auth";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React, { useState } from "react";
@@ -50,11 +51,14 @@ export default function Login() {
     const handleLogin = async () => {
         if (!validateForm()) return;
         try {
+            const user: UserLogin = {
+                'email': email,
+                'password': password
+            };
             setLoading(true);
             setErrors({});
-            await login({ email: email, password: password });
+            await login({ user: user });
         } catch (error) {
-            console.error("Login error:", error);
             Alert.alert("Error", "Network error. Please check your connection and try again.");
         } finally {
             setLoading(false);
