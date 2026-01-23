@@ -1,10 +1,8 @@
-import { Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 function Notification(){
   return (
-    <View>
-      <Text>Hello From Notification</Text>
-    </View>
+   <SafeAreaView></SafeAreaView>
   )
 }
 

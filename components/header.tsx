@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
-export function Header(isDark: boolean) {
+export function Header() {
     return (
-        <View style={[styles.header, isDark && styles.darkHeader]}>
+        <View style={[styles.header]}>
             <Text style={styles.appName}>
                 <Text style={styles.appNameBold}>Civic</Text>
                 <Text style={[styles.darkAppNameLight]}>Care</Text>

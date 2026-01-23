@@ -14,9 +14,22 @@ function Home() {
   const isDark = colorScheme === 'dark';
   return (
     <SafeAreaView style={styles.container}>
-      {Header(isDark)}
+      {Header()}
       <TopTap.Navigator screenOptions={{
         tabBarScrollEnabled: false,
+        tabBarActiveTintColor: '#90D5ff',
+        tabBarInactiveTintColor: 'Colors.light.text',
+        tabBarLabelStyle: {
+          color: '#4065ad',
+          fontWeight: '700'
+        },
+        tabBarStyle: {
+          backgroundColor: '#90D5ff',
+          elevation: 0,
+          marginTop: 0,
+          borderBottomColor: '#61b4e8',
+          borderBottomWidth: 2,
+        },
         sceneStyle: {
           backgroundColor: '#90D5ff'
         }
