@@ -4,15 +4,15 @@ import { StyleSheet, View } from 'react-native';
 
 import { HapticTab } from '@/components/haptic-tab';
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { useNotification } from '@/contexts/notifications-context';
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { useNotificationCount } from '@/services/notifications_service';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
   const insets = useSafeAreaInsets();
-  const notificationCount = useNotificationCount();
+  const { socketCount } = useNotification() ;
   return (
     <Tabs
       screenOptions={{
@@ -67,7 +67,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="notifications"
         options={{
-          tabBarBadge: notificationCount,
+          tabBarBadge: socketCount,
           title: 'Alerts',
           tabBarIcon: ({ color, focused }) => (
             <View style={focused ? styles.activeIconContainer : null}>
