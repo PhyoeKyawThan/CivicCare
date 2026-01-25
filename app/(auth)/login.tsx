@@ -58,7 +58,11 @@ export default function Login() {
             setErrors({});
             await login({ user: user });
         } catch (error) {
-            Alert.alert("Error", "Network error. Please check your connection and try again.");
+            if (error instanceof Error) {
+                if (error.message === "Invalid credentials") {
+                    Alert.alert(error.message, "Incorrect username, email or password");
+                }
+            }
         } finally {
             setLoading(false);
         }

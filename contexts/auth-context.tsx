@@ -1,5 +1,5 @@
 import { LoginCredentials, SignupData, User } from "@/constants/auth";
-import { deleteToken, setToken } from "@/utils/auth/seure-storage";
+import { deleteRefreshToken, deleteToken, setRefreshToken, setToken } from "@/utils/auth/seure-storage";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { createContext, useEffect, useState } from "react";
 
@@ -38,31 +38,78 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     const login = async (data: { user: LoginCredentials }) => {
-        const user: User = {
-            'id': 1,
-            'username': 'domak',
-            'email': 'domak@gmail.com',
-            'fullName': 'domak',
-            'role': 'citizan',
-        };
-        const token = "thisistokenfrom request";
-        setUser(user);
-        setToken(token);
-        await setItem(JSON.stringify(data));
+        try {
+            const response = await fetch('http://192.168.100.49:8000/api/v1/user/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    'username': data.user.email,
+                    'password': data.user.password
+                }),
+            });
+
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.non_field_errors?.[0] || 'Login Failed');
+            } else {
+                const resData = await response.json();
+                const token = resData.access;
+                const user = resData.user;
+                const refreshToken = resData.refresh;
+                setUser(user);
+                await setToken(token);
+                await setRefreshToken(refreshToken);
+            }
+        } catch (error) {
+            let message = 'Server Error, Login failed!';
+
+            if (error instanceof Error) {
+                throw new Error(error.message ?? message);
+            }
+        }
     };
 
-    const signup = async (data: { user: SignupData;}) => {
-        // let user: User = data.user;
-        
-        setUser(user);
-        const token = "thisistokenfrom request";
-        setToken(token);
-        await setItem(JSON.stringify(data));
+    const signup = async (data: { user: SignupData; }) => {
+        try {
+            const response = await fetch('http://192.168.100.49:8000/api/v1/user/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    'username': data.user.username,
+                    'full_name': data.user.fullName,
+                    'phone': data.user.phone,
+                    'role': data.user.role,
+                    'email': data.user.email,
+                    'date_of_birth': data.user.dateOfBirth,
+                    'password': data.user.password
+                }),
+            });
+
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.non_field_errors?.[0] || 'Signup failed');
+            }
+
+            const resData = await response.json();
+            const token = resData.access;
+            const user = resData.user;
+            const refreshToken = resData.refresh;
+            setUser(user);
+            await setToken(token);
+            await setRefreshToken(refreshToken);
+        } catch (error) {
+            throw new Error('Server Error, Signup failed!');
+        }
     };
 
     const logout = async () => {
         setUser(null);
         deleteToken();
+        deleteRefreshToken();
         await removeItem();
     };
 
