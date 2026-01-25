@@ -1,19 +1,27 @@
-import { notifications_samples } from "@/assets/samples/noti_samples";
+import { notificationSamples } from "@/assets/samples/noti_samples";
 import { Header } from "@/components/header";
 import NotificationItem from "@/components/notification";
 import { useNotification } from "@/contexts/notifications-context";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { ScrollView, View } from "react-native";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 
 function Notification() {
   const { clearNotification } = useNotification();
-
+  const insets = useSafeAreaInsets();
   return (
     <SafeAreaView>
-      {Header('Notifications')}
-      {notifications_samples.map((noti)=>{
-        return <NotificationItem key={noti.notification_id} notification={noti}/>
-      })}
+      <Header headerTitle="Notifications" />
+      <ScrollView>
+        <View style={{
+          flex: 1,
+          paddingBottom: 120 + insets.bottom,
+        }}>
+          {notificationSamples.map((notification) => {
+            return <NotificationItem key={notification.id} notification={notification} />
+          })}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }

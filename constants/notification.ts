@@ -1,6 +1,24 @@
+
+export type NotiType = 'INFO' | 'WARNING' | 'SUCCESS' | 'SYSTEM';
+
+
+interface NotificationUser{
+    id: string,
+    avatar?: string,
+    email: string,
+    username?: string,
+    full_name: string
+}
+
 export type NotificationType = {
-    notification_id: string,
+    id: string,
+    user: NotificationUser,
     title: string,
     body: string,
-    from?: string,
+    ref_url?: string,
+    type: NotiType,
+    is_read: boolean,
+    created_at: string,
+    read_at?: string,
+    data?: string
 };

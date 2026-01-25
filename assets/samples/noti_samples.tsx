@@ -1,79 +1,148 @@
 import { NotificationType } from "@/constants/notification";
-
-export const notifications_samples: NotificationType[] = [
+export const notificationSamples: NotificationType[] = [
   {
-    notification_id: '101',
-    title: "Welcome!",
-    body: "Thanks for joining our platform."
+    id: "1",
+    user: {
+      id: "u1",
+      full_name: "john_doe",
+      email: "john@example.com",
+    },
+    title: "Issue Submitted",
+    body: "Your reported issue has been successfully submitted.",
+    ref_url: "/issues/123",
+    type: "INFO",
+    is_read: false,
+    created_at: "2026-01-20T08:15:30Z",
   },
   {
-    notification_id: '102',
-    title: "Profile Updated",
-    body: "Your profile information was updated successfully."
+    id: "2",
+    user: {
+      id: "u1",
+      full_name: "john_doe",
+      email: "john@example.com",
+    },
+    title: "Issue Approved",
+    body: "Your issue has been approved by the admin.",
+    ref_url: "/issues/123",
+    type: "SYSTEM",
+    is_read: true,
+    created_at: "2026-01-20T10:00:00Z",
+    read_at: "2026-01-20T10:05:12Z",
   },
   {
-    notification_id: '103',
-    title: "New Message",
-    body: "You have received a new message."
+    id: "3",
+    user: {
+      id: "u2",
+      full_name: "mary_admin",
+      email: "mary@admin.com",
+    },
+    title: "New Issue Assigned",
+    body: "A new issue has been assigned to you.",
+    ref_url: "/admin/issues/456",
+    type: "SYSTEM",
+    is_read: false,
+    created_at: "2026-01-21T02:45:00Z",
   },
   {
-    notification_id: '104',
+    id: "4",
+    user: {
+      id: "u1",
+      full_name: "john_doe",
+      email: "john@example.com",
+    },
     title: "Password Changed",
-    body: "Your password has been changed securely."
+    body: "Your account password was changed successfully.",
+    type: "SYSTEM",
+    is_read: true,
+    created_at: "2026-01-21T05:20:10Z",
+    read_at: "2026-01-21T05:21:00Z",
   },
   {
-    notification_id: '105',
-    title: "Reminder",
-    body: "Don't forget to complete your pending tasks."
+    id: "5",
+    user: {
+      id: "u1",
+      full_name: "john_doe",
+      email: "john@example.com",
+    },
+    title: "New Comment",
+    body: "Someone commented on your reported issue.",
+    ref_url: "/issues/123#comments",
+    type: "INFO",
+    is_read: false,
+    created_at: "2026-01-22T01:12:45Z",
+    data: JSON.stringify({
+      comment_id: 789,
+      commenter: "admin_01",
+    }),
   },
   {
-    notification_id: '106',
-    title: "System Update",
-    body: "The app has been updated with new features."
+    id: "6",
+    user: {
+      id: "u1",
+      full_name: "john_doe",
+      email: "john@example.com",
+    },
+    title: "Issue Resolved",
+    body: "Good news! Your issue has been resolved.",
+    ref_url: "/issues/123",
+    type: "SUCCESS",
+    is_read: false,
+    created_at: "2026-01-23T06:30:00Z",
   },
   {
-    notification_id: '107',
-    title: "Security Alert",
-    body: "A new login was detected from another device."
+    id: "7",
+    user: {
+      id: "u3",
+      full_name: "system",
+      email: "system@civiccare.com",
+    },
+    title: "System Maintenance",
+    body: "The system will be under maintenance tonight from 12 AM to 2 AM.",
+    type: "WARNING",
+    is_read: true,
+    created_at: "2026-01-23T09:00:00Z",
+    read_at: "2026-01-23T09:05:00Z",
   },
   {
-    notification_id: '108',
-    title: "Payment Successful",
-    body: "Your payment was processed successfully."
+    id: "8",
+    user: {
+      id: "u3",
+      full_name: "system",
+      email: "system@civiccare.com",
+    },
+    title: "System Maintenance",
+    body: "The system will be under maintenance tonight from 12 AM to 2 AM.",
+    type: "WARNING",
+    is_read: true,
+    created_at: "2026-01-23T09:00:00Z",
+    read_at: "2026-01-23T09:05:00Z",
   },
   {
-    notification_id: '109',
-    title: "Subscription Expiring",
-    body: "Your subscription will expire in 3 days."
+    id: "9",
+    user: {
+      id: "u3",
+      full_name: "system",
+      email: "system@civiccare.com",
+    },
+    title: "System Maintenance",
+    body: "The system will be under maintenance tonight from 12 AM to 2 AM.",
+    type: "WARNING",
+    is_read: true,
+    created_at: "2026-01-23T09:00:00Z",
+    read_at: "2026-01-23T09:05:00Z",
   },
   {
-    notification_id: '110',
-    title: "New Feature",
-    body: "Check out the latest feature added to the app."
-  },
-  {
-    notification_id: '111',
-    title: "Connection Restored",
-    body: "Your internet connection has been restored."
-  },
-  {
-    notification_id: '112',
-    title: "Daily Update",
-    body: "Here is your daily activity summary."
-  },
-  {
-    notification_id: '113',
-    title: "Account Verified",
-    body: "Your account has been successfully verified."
-  },
-  {
-    notification_id: '114',
-    title: "Warning",
-    body: "Unusual activity detected. Please review."
-  },
-  {
-    notification_id: '115',
-    title: "Logout Successful",
-    body: "You have been logged out safely."
+    id: "10",
+    user: {
+      id: "u3",
+      full_name: "system",
+      email: "system@civiccare.com",
+    },
+    title: "System Maintenance",
+    body: "The system will be under maintenance tonight from 12 AM to 2 AM.",
+    type: "WARNING",
+    is_read: true,
+    created_at: "2026-01-23T09:00:00Z",
+    read_at: "2026-01-23T09:05:00Z",
   }
 ];
