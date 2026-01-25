@@ -25,6 +25,7 @@ type UserRole = 'citizen' | 'official' | 'admin';
 
 export default function Signup() {
   const [formData, setFormData] = useState({
+    username: "",
     fullName: "",
     email: "",
     phone: "",
@@ -119,7 +120,7 @@ export default function Signup() {
         dateOfBirth: formData.dateOfBirth.toISOString().split('T')[0],
         role: 'citizan',
       }
-      await signup({user: user});
+      await signup({ user: user });
     } catch (error) {
       console.error("Signup error:", error);
       Alert.alert("Error", "Network error. Please check your connection and try again.");
@@ -183,6 +184,33 @@ export default function Signup() {
 
           {/* Form */}
           <View style={styles.formContainer}>
+            {/* username */}
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>Username *</Text>
+              <View style={[
+                styles.inputWrapper,
+                errors.fullName && styles.inputError
+              ]}>
+                <Ionicons
+                  name="person-outline"
+                  size={20}
+                  color="#64748B"
+                  style={styles.inputIcon}
+                />
+                <TextInput
+                  style={styles.input}
+                  value={formData.username}
+                  onChangeText={(text) => handleInputChange('username', text)}
+                  placeholder="Enter your username"
+                  placeholderTextColor="#94A3B8"
+                  autoCapitalize="words"
+                  editable={!loading}
+                />
+              </View>
+              {errors.fullName && (
+                <Text style={styles.errorText}>{errors.fullName}</Text>
+              )}
+            </View>
             {/* Full Name */}
             <View style={styles.inputGroup}>
               <Text style={styles.label}>Full Name *</Text>

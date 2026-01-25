@@ -15,7 +15,8 @@
       "permissions": [
         "FOREGROUND_SERVICE",
         "FOREGROUND_SERVICE_DATA_SYNC", 
-        "POST_NOTIFICATIONS"
+        "POST_NOTIFICATIONS",
+        "INTERNET"
       ],
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",

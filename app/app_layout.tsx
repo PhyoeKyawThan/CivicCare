@@ -10,7 +10,7 @@ function AppLayout() {
     return null;
   }
 
-  const isLoggedIn = true;
+  const isLoggedIn = !!user;
 
   return (
     <Stack>

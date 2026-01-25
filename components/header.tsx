@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-export function Header() {
+export function Header(headerTitle: string | null = null) {
     return (
         <View style={[styles.header]}>
             <Text style={styles.appName}>
@@ -7,7 +7,7 @@ export function Header() {
                 <Text style={[styles.darkAppNameLight]}>Care</Text>
             </Text>
             <Text style={[styles.darkText]}>
-                Community Dashboard
+                {headerTitle ?? 'Community Dashboard'}
             </Text>
         </View>
     );
