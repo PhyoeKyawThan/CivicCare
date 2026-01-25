@@ -1,5 +1,11 @@
+import { Colors } from "@/constants/theme";
 import { StyleSheet, Text, View } from "react-native";
-export function Header(headerTitle: string | null = null) {
+
+interface HederProps{
+    headerTitle?: string
+}
+
+export function Header({headerTitle}:HederProps) {
     return (
         <View style={[styles.header]}>
             <Text style={styles.appName}>
@@ -18,7 +24,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingTop: 16,
         paddingBottom: 12,
-        backgroundColor: '#55bdfd',
+        // backgroundColor: '#55bdfd',
+        backgroundColor: Colors.light.background,
         borderBottomWidth: 1,
         borderBottomColor: '#E2E8F0',
     },
@@ -31,7 +38,8 @@ const styles = StyleSheet.create({
     },
     appNameBold: {
         fontWeight: '700',
-        color: '#0963f5',
+        // color: '#6cedca',
+        color: '#1d1919',
         letterSpacing: -0.5,
     },
     appNameLight: {
@@ -40,14 +48,14 @@ const styles = StyleSheet.create({
         letterSpacing: -0.5,
     },
     darkAppNameLight: {
-        color: '#E2E8F0',
+        color: '#388139',
     },
     headerSubtitle: {
         fontSize: 14,
-        color: '#64748B',
+        color: '#121518',
         fontWeight: '500',
     },
     darkText: {
-        color: '#ede8e8',
+        color: '#282525',
     },
 })

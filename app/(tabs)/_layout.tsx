@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 
 import { HapticTab } from '@/components/haptic-tab';
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { Colors } from '@/constants/theme';
 import { useNotification } from '@/contexts/notifications-context';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -17,25 +18,25 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         sceneStyle: {
-          backgroundColor: '#90D5ff'
+          backgroundColor: Colors.light.background,
         },
-        tabBarActiveTintColor: 'white',
-        tabBarInactiveTintColor: '#bfd2f6',
+        tabBarActiveTintColor: '#ffffff',
+        tabBarInactiveTintColor: Colors.light.inActiveIcon, 
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
           position: 'absolute',
-          backgroundColor: '#378fc5',
-          // borderTopWidth: 1,
-          borderTopColor: isDark ? '#1E293B' : '#E2E8F0',
+          backgroundColor: Colors.light.background,
+          borderTopColor: '#E2E8F0',
           height: 60 + insets.bottom,
           paddingBottom: insets.bottom,
           paddingTop: 12,
-          borderRadius: 50,
+          borderTopEndRadius: 50,
+          borderTopStartRadius: 50,
           elevation: 8,
-          shadowColor: isDark ? '#000' : '#64748B',
+          shadowColor: 'black',
           shadowOffset: { width: 0, height: -2 },
-          shadowOpacity: isDark ? 0.3 : 0.1,
+          shadowOpacity: 0,
           shadowRadius: 12,
         },
         tabBarLabelStyle: {
@@ -91,7 +92,7 @@ export default function TabLayout() {
             } : '']}>
               <View style={[
                 styles.centralIconBackground,
-                { backgroundColor: '#378fc5' }
+                { backgroundColor: '#caeec6' }
               ]}>
                 <IconSymbol
                   size={28}
@@ -141,7 +142,11 @@ export default function TabLayout() {
 
 const styles = StyleSheet.create({
   activeIconContainer: {
-    borderRadius: 12,
+    borderRadius: 50,
+    width: 50,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: 'rgba(59, 130, 246, 0.1)',
   },
   centralIconContainer: {
@@ -151,8 +156,8 @@ const styles = StyleSheet.create({
     borderRadius: 32,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#bfd2f0',
-    shadowColor: '#3B82F6',
+    backgroundColor: '#519146',
+    shadowColor: '#caeec6',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
@@ -165,6 +170,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 3,
-    borderColor: '#b0c3e1',
+    borderColor: '#178d13',
   },
 });

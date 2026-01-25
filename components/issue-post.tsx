@@ -83,7 +83,7 @@ export default function IssuePost({ issue }: IssuePostProps) {
 const styles = StyleSheet.create({
     card: {
         // height: 400,
-        backgroundColor: '#EEF6FF',
+        backgroundColor: '#fafcfa',
         boxShadow: 'rgba(0,0,0,0.08)',
         borderColor: '#E5E7EB',
         margin: 10,

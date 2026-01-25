@@ -1,4 +1,5 @@
 import { Header } from "@/components/header";
+import { Colors } from "@/constants/theme";
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { StyleSheet } from "react-native";
@@ -14,24 +15,28 @@ function Home() {
   const isDark = colorScheme === 'dark';
   return (
     <SafeAreaView style={styles.container}>
-      {Header()}
+      <Header/>
       <TopTap.Navigator screenOptions={{
         tabBarScrollEnabled: false,
-        tabBarActiveTintColor: '#90D5ff',
-        tabBarInactiveTintColor: 'Colors.light.text',
+        // tabBarActiveTintColor: 'white',
+        tabBarIndicatorStyle: {
+          backgroundColor: '#231d1d'
+        },
+        // tabBarInactiveTintColor: 'Colors.light.text',
         tabBarLabelStyle: {
-          color: '#4065ad',
-          fontWeight: '700'
+          fontWeight: '700',
+          borderBottomColor: "white"
         },
         tabBarStyle: {
-          backgroundColor: '#90D5ff',
+          // backgroundColor: '#90D5ff',
+          backgroundColor: Colors.light.background,
           elevation: 0,
           marginTop: 0,
-          borderBottomColor: '#61b4e8',
-          borderBottomWidth: 2,
+          borderBottomColor: '#92f68e',
+          borderBottomWidth: 1,
         },
         sceneStyle: {
-          backgroundColor: '#90D5ff'
+          backgroundColor: Colors.light.background
         }
       }}>
         <TopTap.Screen name="Issues" options={{
@@ -49,19 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: '#F8FAFC',
   },
-  darkContainer: {
-    backgroundColor: '#0F172A',
-  },
-  tabContainer: {
-    backgroundColor: '#90D5ff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#E2E8F0',
-    elevation: 2,
-    shadowColor: '#64748B',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-  },
+  
 });
 
 export default Home;
