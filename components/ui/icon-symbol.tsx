@@ -1,7 +1,7 @@
 // Fallback for using MaterialIcons on Android and web.
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { SymbolWeight, SymbolViewProps } from 'expo-symbols';
+import { SymbolViewProps, SymbolWeight } from 'expo-symbols';
 import { ComponentProps } from 'react';
 import { OpaqueColorValue, type StyleProp, type TextStyle } from 'react-native';
 
@@ -22,7 +22,8 @@ const MAPPING = {
   'exclamationmark.triangle.fill': 'escalator-warning',
   'person.fill': 'person',
   'gearshape.fill': 'settings',
-  'x.circle': 'close'
+  'x.circle': 'close',
+  'info.bubble.fill': 'info-outline'
 } as IconMapping;
 
 /**

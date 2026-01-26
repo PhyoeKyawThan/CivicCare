@@ -5,7 +5,6 @@ import { StyleSheet, View } from 'react-native';
 import { HapticTab } from '@/components/haptic-tab';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
-import { useNotification } from '@/contexts/notifications-context';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -13,7 +12,8 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
   const insets = useSafeAreaInsets();
-  const { socketCount } = useNotification() ;
+  // const { socketCount } = useNotification() ;
+  const socketCount = 0;
   return (
     <Tabs
       screenOptions={{
