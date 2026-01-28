@@ -5,7 +5,7 @@ from user.models import User
 
 class IssueType(models.Model):
     name = models.CharField(max_length=100)
-    description = models.CharField(max_length=255, null=True, blank=True)
+    sample_form = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(default=now)
 
     def __str__(self):
