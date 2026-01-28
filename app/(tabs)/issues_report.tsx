@@ -2,6 +2,7 @@ import { Header } from '@/components/header';
 import IssueSampleFormat from '@/components/models/issue-sample-format';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
+import { useIssueType } from '@/services/issue_types';
 import React, { useState } from 'react';
 import {
   ScrollView,
@@ -14,16 +15,8 @@ import {
 import { Dropdown } from 'react-native-element-dropdown';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const sample_issuetype = [
-  { label: 'Waste Management', value: 1, sample_form: "English ဘာသာ Lorem ipsum စာများသည် ယေဘုယျအားဖြင့် pseudo-Latin စကားလုံးများဖြင့် ဖွဲ့စည်းထားခြင်းဖြစ်ပါသည်။ ဒီဇိုင်းများကို နမူနာပြသရန် နှင့် ဒီဇိုင်၏ အရည်အသွေးကို စမ်းစစ်ရန် အတွက် placeholder text အနေဖြင့် ကျယ်ပြန့်စွာ အသုံပြုလျှက်ရှိပါသည်။ စကားလုံးများတွင် အဓိပ္ပာယ် မရှိသည့်အားလျှောစွာ ဖတ်ရှုသူ အနေနဲ့ စာကို ဖတ်ရှုနေစရာ မလိုအပ်ပဲ ဒီဇိုင်းကို ပိုမို အာရုံစိုက်နိုင်ပါသည်။ ဘာသာစကား အသီးသီးတွင် Lorem ipsum များရှိသကဲ့သိုပင် ယခုမှာ မြန်မာ ဘာသာ အတွက် ဖြစ်ပါသည်။ယခု စာမျက်နှာ သည် Lorem ipsum များကို မြန်မာ Version အနေနဲ့ ထုတ်ပေးထားခြင်းဖြစ်ပါသည်။ စာပိုဒ် (၅) ပိုဒ်ပါ၀င်ပြီး စာပိုဒ် တစ်ခုချင်းစီတွင် ၀ါကျ (၅) ခုမှ (၆) အထိပါ၀င်ပါသည်။ စာလုံးတိုင်းတွင် လူသုံးနည်းသော ပါဠိ စာတစ်၀က် နှင့် လူသုံးများသော မြန်မာစာ တစ်၀က် ပါ၀င် ပါသည်။ ပါ၀င်သော ပါဠိစာများသည် ပုံမှန် စာဖတ်သူများ အတွက် ဖတ်ရှုရန် ခက်ခဲသော စာများဖြစ်စေပါသည်။ pseudo-sentence စာများကို generate လုပ်သည့် အဆင့် တစ်ဆင့်စီကို အောက်ပါစာပိုဒ်တွင် ဖော်ပြထားပါသည်။ပါဠိစာအမှန် (၁၂) ကြောင်း နှင့် မြန်မာ စာအမှန် (၁၂) ကြောင်း၏ ဝဏ္ဏ syllable များကို ကျပန်း ရောမွှေ ပါသည်။ အဆိုပါ ကျပန်း ဝဏ္ဏ (၂) လုံး မှ (၆) လုံးအထိကိုစုစည်းပြီး ကျပန်း ပုဒ်စု phrase ကိုရရှိပါသည်။ အဆိုပါ ပုဒ်စု (၃) ခုမှ (၉) ခုကို စုစည်းပြီး ၀ါကျ sentence များကို တည်ဆောက်ပါသည်။ ရလဒ်အနေနှင့် စာအမှန်နှင့် အမြင်တွင်လွန်စွာ ဆင်တူပြီး ဖတ်ရှုရန် မလွယ်သော ၀ါကျများကို ရရှိပါသည်။" },
-  { label: 'Water Supply', value: 2, sample_form: "2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam maiores dolor ducimus cum itaque aspernatur vel, fugit architecto doloremque. Iure reiciendis ad esse sed labore. Aperiam hic error est nulla." },
-  { label: 'Public Park Maintenance', value: 3, sample_form: "3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam maiores dolor ducimus cum itaque aspernatur vel, fugit architecto doloremque. Iure reiciendis ad esse sed labore. Aperiam hic error est nulla." },
-  { label: 'Road & Infrastructure', value: 4, sample_form: "4 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam maiores dolor ducimus cum itaque aspernatur vel, fugit architecto doloremque. Iure reiciendis ad esse sed labore. Aperiam hic error est nulla." },
-  { label: 'Air & Noise Pollution', value: 5, sample_form: "5 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam maiores dolor ducimus cum itaque aspernatur vel, fugit architecto doloremque. Iure reiciendis ad esse sed labore. Aperiam hic error est nulla." },
-  { label: 'Drainage & Flooding', value: 6, sample_form: "6 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam maiores dolor ducimus cum itaque aspernatur vel, fugit architecto doloremque. Iure reiciendis ad esse sed labore. Aperiam hic error est nulla." }
-];
-
 function IssueReportScreen() {
+  const { issueTypes, getIssues } = useIssueType();
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -34,8 +27,8 @@ function IssueReportScreen() {
     issue_type_id: 1,
   });
   const [issueSample, setIssueSample] = useState({
-    issueType: 'You don',
-    sampleFormatText: 'asdfsad',
+    issueType: 'တင်ပြချက် အမျိူးအစား ရွေးမချယ်ရသေးပါ။',
+    sampleFormatText: '',
     visible: false,
   });
 
@@ -67,12 +60,16 @@ function IssueReportScreen() {
                 containerStyle={styles.modalContainer}
                 itemTextStyle={styles.itemText}
                 activeColor="#e8f5e9"
-                data={sample_issuetype}
+                data={issueTypes.map((issue)=>({
+                  label: issue.name,
+                  value: issue.id,
+                  sample_form: issue.sample_form
+                }))}
                 maxHeight={300}
                 labelField="label"
                 valueField="value"
-                placeholder="Select Issue Type"
-                value={sample_issuetype[0].label}
+                placeholder="တင်ပြချက် အမျိူးအစား ရွေးရန်နှိပ်ပါ"
+                value=''
                 onChange={item => {
                   setFormData({ ...formData, issue_type_id: item.value });
                   setIssueSample({...issueSample, issueType: item.label, sampleFormatText: item.sample_form})
@@ -85,7 +82,7 @@ function IssueReportScreen() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.text }]}>အကြောင်းအရာ</Text>
             <TextInput
-              placeholder="Enter issue title"
+              placeholder="ဥပမာ: လူနေမှုပတ်ဝန်းကျင် နှောက်ယှက်မှူ တိုင်ကြားလွှာ"
               placeholderTextColor={theme.icon}
               style={[styles.input, {
                 backgroundColor: theme.activeIcon,
@@ -104,7 +101,17 @@ function IssueReportScreen() {
               justifyContent: 'space-between'
             }}>
               <Text style={[styles.label, { color: theme.text }]}>တင်ပြချက်</Text>
-              <TouchableOpacity onPress={() => setIssueSample((prev) => ({...prev, visible: true}))}>
+              <TouchableOpacity style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: 7
+              }} onPress={() => setIssueSample((prev) => ({...prev, visible: true}))}>
+                <Text style={{
+                  fontSize: 10
+                }}>
+                တင်ပြချက််ဥပမာ ကြည့်ရန်
+                </Text>
                 <IconSymbol name='info.bubble.fill' color='blue' />
               </TouchableOpacity>
             </View>
@@ -113,10 +120,10 @@ function IssueReportScreen() {
                 backgroundColor: theme.activeIcon,
                 borderColor: theme.inActiveIcon,
                 color: theme.text
-              }]}
+              }]} 
               value={formData.description}
               onChangeText={(text) => setFormData({ ...formData, description: text })}
-              placeholder="Describe the issue..."
+              placeholder="တင်ပြချက်..."
               placeholderTextColor={theme.icon}
               multiline
             />
@@ -206,7 +213,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     padding: 12,
-    fontSize: 16
+    fontSize: 12
   },
   textarea: {
     height: 400,

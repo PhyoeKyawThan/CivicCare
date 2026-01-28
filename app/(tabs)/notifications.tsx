@@ -1,13 +1,12 @@
 import { notificationSamples } from "@/assets/samples/noti_samples";
 import { Header } from "@/components/header";
 import NotificationItem from "@/components/notification";
-import { useNotification } from "@/contexts/notifications-context";
 import { ScrollView, View } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 
 function Notification() {
-  const { clearNotification } = useNotification();
+  // const { clearNotification } = useNotification();
   const insets = useSafeAreaInsets();
   return (
     <SafeAreaView>

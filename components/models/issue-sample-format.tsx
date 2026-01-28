@@ -34,25 +34,32 @@ export default function IssueSampleFormat({
                 }]}>
                     {/* Header */}
                     <View style={styles.header}>
-                        <Text style={styles.title}>{issue_sample.issueType}</Text>
                         <Pressable onPress={onClose}>
-                            <Text style={styles.close}>Close</Text>
+                            <Text style={styles.close}>ပိတ်ရန်</Text>
                         </Pressable>
                     </View>
+                    <Text style={styles.title}>{issue_sample.issueType}</Text>
 
                     {/* Selectable Content */}
                     <View style={styles.content}>
                         <TouchableOpacity
                             onPress={copyText}
                             style={{
-                                width: 'auto',
+                                position: 'absolute',
+                                zIndex: 9999,
                                 borderRadius: 18,
                                 backgroundColor: Colors.light.background,
                                 padding: 8,
+                                right: 0,
+                                top: -30
                             }}>
-                            <Text style={{
+                            <Text style={ isCopied ?{
                                 textAlign: 'center',
-                                fontWeight: '600'
+                                fontWeight: '600',
+                                color: 'green',
+                            } :{
+                                textAlign: 'center',
+                                fontWeight: '400'
                             }}>{isCopied ? 'Copied Text': 'Copy Text'}</Text>
                         </TouchableOpacity>
                         <Text style={styles.sampleText}>
@@ -69,24 +76,23 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#fff",
         padding: 16,
-        justifyContent: 'center'
+        // justifyContent: 'center'
     },
     header: {
         flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
+        justifyContent: "flex-end",
         marginBottom: 12,
     },
     title: {
         fontSize: 18,
-        fontWeight: "600",
+        fontWeight: "800",
     },
     close: {
         color: "#2563eb",
         fontSize: 16,
     },
     content: {
-        // flex: 1, 
+        marginTop: 20
     },
     sampleText: {
         fontSize: 16,
