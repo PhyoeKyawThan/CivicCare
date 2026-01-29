@@ -1,4 +1,3 @@
-import { Colors } from "@/constants/theme";
 import { StyleSheet, Text, View } from "react-native";
 
 interface HederProps{
@@ -9,8 +8,8 @@ export function Header({headerTitle}:HederProps) {
     return (
         <View style={[styles.header]}>
             <Text style={styles.appName}>
-                <Text style={styles.appNameBold}>Civic</Text>
-                <Text style={[styles.darkAppNameLight]}>Care</Text>
+                <Text style={styles.appNameBold}>ပြည်သူအကျိုးပြု</Text>
+                {/* <Text style={[styles.darkAppNameLight]}>Care</Text> */}
             </Text>
             <Text style={[styles.darkText]}>
                 {headerTitle ?? 'Community Dashboard'}
@@ -25,7 +24,7 @@ const styles = StyleSheet.create({
         paddingTop: 16,
         paddingBottom: 12,
         // backgroundColor: '#55bdfd',
-        backgroundColor: Colors.light.background,
+        backgroundColor: '#7cdb84',
         borderBottomWidth: 1,
         borderBottomColor: '#E2E8F0',
     },
@@ -48,7 +47,8 @@ const styles = StyleSheet.create({
         letterSpacing: -0.5,
     },
     darkAppNameLight: {
-        color: '#388139',
+        color: '#1d1919',
+        fontWeight: '700'
     },
     headerSubtitle: {
         fontSize: 14,

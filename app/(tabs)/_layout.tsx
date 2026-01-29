@@ -21,12 +21,12 @@ export default function TabLayout() {
           backgroundColor: Colors.light.background,
         },
         tabBarActiveTintColor: '#ffffff',
-        tabBarInactiveTintColor: Colors.light.inActiveIcon, 
+        tabBarInactiveTintColor: Colors.light.inActiveIcon,
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
           position: 'absolute',
-          backgroundColor: Colors.light.background,
+          backgroundColor: '#aaeaaf',
           borderTopColor: '#E2E8F0',
           height: 60 + insets.bottom,
           paddingBottom: insets.bottom,
@@ -66,21 +66,21 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="notifications"
+        name="profile"
         options={{
-          tabBarBadge: socketCount,
-          title: 'Alerts',
+          title: 'Profile',
           tabBarIcon: ({ color, focused }) => (
             <View style={focused ? styles.activeIconContainer : null}>
               <IconSymbol
                 size={focused ? 26 : 24}
-                name="bell.fill"
+                name="person.fill"
                 color={color}
               />
             </View>
           ),
         }}
       />
+
 
       <Tabs.Screen
         name="issues_report"
@@ -106,14 +106,15 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="profile"
+        name="notifications"
         options={{
-          title: 'Profile',
+          tabBarBadge: socketCount,
+          title: 'Alerts',
           tabBarIcon: ({ color, focused }) => (
             <View style={focused ? styles.activeIconContainer : null}>
               <IconSymbol
                 size={focused ? 26 : 24}
-                name="person.fill"
+                name="bell.fill"
                 color={color}
               />
             </View>

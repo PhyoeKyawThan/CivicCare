@@ -17,7 +17,7 @@ function Home() {
     <SafeAreaView style={styles.container}>
       <Header/>
       <TopTap.Navigator screenOptions={{
-        tabBarScrollEnabled: false,
+        tabBarScrollEnabled: true,
         // tabBarActiveTintColor: 'white',
         tabBarIndicatorStyle: {
           backgroundColor: '#231d1d'
@@ -29,7 +29,7 @@ function Home() {
         },
         tabBarStyle: {
           // backgroundColor: '#90D5ff',
-          backgroundColor: Colors.light.background,
+          backgroundColor: '#aaeaaf',
           elevation: 0,
           marginTop: 0,
           borderBottomColor: '#92f68e',
@@ -40,10 +40,18 @@ function Home() {
         }
       }}>
         <TopTap.Screen name="Issues" options={{
-          title: "Issues"
+          title: "ဒေသဖွင့်ဖြိုးရေး"
         }} component={IssuesScreen} />
-        <TopTap.Screen name="Solved" component={SolvedScreen} />
-        <TopTap.Screen name="Onsolving" component={OnSolvingIssueScreen} />
+        <TopTap.Screen options={{
+          title: "မဆောင်ရွက်ခင်"
+        }} name="Solved" component={SolvedScreen} />
+        <TopTap.Screen options={{
+          title: "ဆောင်ရွက်ဆဲ"
+        }} name="Onsolving" component={OnSolvingIssueScreen} />
+
+        <TopTap.Screen options={{
+          title: "ဆောင်ရွက်ပြီး"
+        }} name="solved" component={OnSolvingIssueScreen} />
       </TopTap.Navigator>
     </SafeAreaView>
   );
