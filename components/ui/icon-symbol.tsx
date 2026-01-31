@@ -23,7 +23,9 @@ const MAPPING = {
   'person.fill': 'person',
   'gearshape.fill': 'settings',
   'x.circle': 'close',
-  'info.bubble.fill': 'info-outline'
+  'info.bubble.fill': 'info-outline',
+  'hand.thumbsup.fill': 'thumb-up',
+  'hand.thumbsdown.fill': 'thumb-down',
 } as IconMapping;
 
 /**

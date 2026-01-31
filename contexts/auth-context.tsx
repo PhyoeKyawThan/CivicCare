@@ -1,5 +1,6 @@
 import { LoginCredentials, SignupData, User } from "@/constants/auth";
-import { deleteRefreshToken, deleteToken, setRefreshToken, setToken } from "@/utils/auth/seure-storage";
+import { useServicesEndPoints } from "@/constants/services_endpoints";
+import { deleteRefreshToken, deleteToken, getToken, setRefreshToken, setToken } from "@/utils/auth/seure-storage";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { createContext, useEffect, useState } from "react";
 
@@ -8,6 +9,7 @@ type AuthContextType = {
     login: (data: { user: LoginCredentials; }) => Promise<void>;
     signup: (data: { user: SignupData; }) => Promise<void>;
     logout: () => Promise<void>;
+    refreshToken: () => Promise<void>;
     loading: boolean;
 };
 
@@ -15,6 +17,7 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
+    const { loginEntry, signupEntry, refreshTokenEntry } = useServicesEndPoints()
 
     const { getItem, setItem, removeItem } = useAsyncStorage("auth");
 
@@ -39,7 +42,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const login = async (data: { user: LoginCredentials }) => {
         try {
-            const response = await fetch('http://192.168.100.49:8000/api/v1/user/login', {
+            const response = await fetch(loginEntry, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -73,7 +76,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const signup = async (data: { user: SignupData; }) => {
         try {
-            const response = await fetch('http://192.168.100.49:8000/api/v1/user/signup', {
+            const response = await fetch(signupEntry, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -106,6 +109,34 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     };
 
+    const refreshToken = async () => {
+        const refresh = await getToken();
+        try {
+            const response = await fetch(refreshTokenEntry, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${refresh}`
+                },
+            });
+
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.non_field_errors?.[0] || 'Signup failed');
+            }
+
+            const resData = await response.json();
+            const token = resData.access;
+            const user = resData.user;
+            const refreshToken = resData.refresh;
+            setUser(user);
+            await setToken(token);
+            await setRefreshToken(refreshToken);
+        } catch (error) {
+            throw new Error('Server Error, Signup failed!');
+        }
+    }
+
     const logout = async () => {
         setUser(null);
         deleteToken();
@@ -120,6 +151,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 login,
                 signup,
                 logout,
+                refreshToken,
                 loading,
             }}
         >
